@@ -42,6 +42,13 @@
       color: #555;
     }
 
+    .legend-item span:last-of-type {
+      margin-right: 50px; /* Ajoutez un espacement à droite du texte */
+    }
+
+    
+
+
     .legend-item span {
       display: inline-block;
       width: 15px;
@@ -58,7 +65,7 @@
 
   <!-- SECTION HERO PRINCIPALE -->
   <header class="hero">
-    <h1>Fusion : Heures & Kilomètres de Voyage</h1>
+    <h1>Analyse des Temps et Distances de Voyage pour les JO 2024</h1>
     <p>Comparaison de la répartition des heures de voyage et des distances parcourues (en km).</p>
   </header>
 
@@ -114,9 +121,10 @@
       { label: "Bus", value: 53, color: "#F39C12" },
       { label: "Moto", value: 404, color: "#D35400" },
       { label: "Voiture", value: 23678, color: "#E74C3C" },
-      { label: "Train/Métro", value: 27966, color: "#2980B9" },
+      { label: "Train\\Métro", value: 27966, color: "#2980B9" },
       { label: "TGV", value: 1442, color: "#85C1E9" },
       { label: "Inconnu", value: 1426, color: "#BDC3C7" },
+      { label: "Avion", value: 0, color: "#8E44AD" },
       { label: "Trottinette", value: 30, color: "#16A085" }
     ];
   
@@ -204,13 +212,7 @@
         };
       });
   
-    // Titre interne au-dessus du SVG (optionnel)
-    d3.select("#chartHeures")
-      .append("div")
-      .style("margin-bottom", "8px")
-      .append("h5")
-      .text(`${totalHeuresAffichage.toLocaleString()} heures totales (exemple)`);
-  
+
     // Légende (Heures)
     const legendHeures = d3.select("#chartHeures")
       .append("div")
@@ -232,7 +234,7 @@
       { label: "Bus", value: 742, color: "#F39C12" },
       { label: "Moto", value: 637, color: "#D35400" },
       { label: "Voiture", value: 41597, color: "#E74C3C" },
-      { label: "Train/Métro", value: 24432, color: "#2980B9" },
+      { label: "Train\\Métro", value: 24432, color: "#2980B9" },
       { label: "TGV", value: 11407, color: "#85C1E9" },
       { label: "Inconnu", value: 8040, color: "#BDC3C7" },
       { label: "Avion", value: 4979, color: "#8E44AD" },
@@ -321,13 +323,6 @@
           return arcKM(interpolate(t));
         };
       });
-  
-    // Titre interne au-dessus du SVG (optionnel)
-    d3.select("#chartKM")
-      .append("div")
-      .style("margin-bottom", "8px")
-      .append("h5")
-      .text(`${totalKMAffichage.toLocaleString()} km totaux (exemple)`);
   
     // Légende (KM)
     const legendKM = d3.select("#chartKM")
