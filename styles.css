@@ -1,0 +1,98 @@
+/* ========== Base Styles ========== */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f9f9f9;
+  color: #333;
+}
+
+/*
+h2 {
+  text-align: center;
+  font-weight: 600;
+  color: #333;
+  margin-top: 20px;
+}
+*/
+/* ========== Hero Section ========== */
+.hero {
+  text-align: center;
+  padding: 30px 20px;
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  color: white;
+}
+.hero h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+/* ========== Navbar ========== */
+.navbar {
+  margin-bottom: 0; /* Supprime l'espace entre la navbar et la hero */
+}
+
+.navbar .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.2); /* Effet survol subtil */
+  transition: background-color 0.3s ease; /* Animation fluide */
+}
+
+#myNavbar {
+  background-color: #000 !important; /* Fond noir personnalisé */
+  color: #fff; /* Texte blanc pour un contraste élevé */
+}
+
+/* ========== Container ========== */
+.container {
+  margin-top: 20px;
+}
+
+/* ========== Footer ========== */
+footer {
+  margin-top: 40px;
+  text-align: center;
+  padding: 10px 0;
+  background-color: #f1f1f1; /* Légère couleur de fond */
+  color: #555; /* Texte plus doux */
+  font-size: 14px;
+}
+
+/* ========== Charts Section ========== */
+.charts-row {
+  display: flex;
+  flex-wrap: wrap; /* Permet aux charts de s'adapter sur des écrans étroits */
+  margin: 20px 0;
+  gap: 20px; /* Espacement entre les charts */
+  justify-content: center; /* Centre les charts sur l'écran */
+}
+
+.chart-container {
+  position: relative; /* Nécessaire pour des éléments positionnés à l'intérieur */
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* ========== Legend Styles ========== */
+
+
+/* ========== STYLE PAGE 1 ========== */
+
+/* ========== STYLE PAGE 2 ========== */
+/* Dimensions et style de la carte */
+
+
+/* ========== STYLE PAGE 3 ========== */
+
+
+
+/* ========== STYLE PAGE 4 ========== */
+
+
+/* ========== STYLE PAGE 5 ========== */
+
+
+
+/* ========== STYLE PAGE 6 ========== */
+
+

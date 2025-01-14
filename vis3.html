@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="styles.css" />
+
   <title>Advanced Interactive Bar Chart Visualization (D3)</title>
 
   <!-- Bootstrap CSS -->
@@ -18,158 +20,169 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f7f9fc;
-      margin: 0;
-      padding: 0;
-    }
-    .navbar {
-      margin-bottom: 0;
-    }
-    .hero {
-      background: #007bff;
-      color: #fff;
-      padding: 40px 20px;
-      text-align: center;
-      margin-bottom: 0;
-    }
-    #chart-container {
-      width: 80%;
-      margin: 40px auto;
-      background: #fff;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
-      padding: 20px;
-      position: relative;
-    }
-    #chart-title {
-      text-align: center;
-      font-size: 18px;
-      font-weight: bold;
-      color: #555;
-      margin-bottom: 10px;
-    }
-    #chart {
-      display: block;
-      margin: 0 auto;
-      background: #fff;
-    }
-    .legend {
-      text-align: center;
-      margin-bottom: 1rem;
-    }
-    .legend-item {
-      display: inline-flex;
-      align-items: center;
-      margin: 0 10px;
-      font-size: 14px;
-      color: #555;
-    }
-    .legend-color {
-      width: 15px;
-      height: 15px;
-      border-radius: 3px;
-      margin-right: 5px;
-      background: #5470C6;
-    }
-    .tooltip-d3 {
-      position: absolute;
-      pointer-events: none;
-      background: #fff;
-      border: 1px solid #ddd;
-      border-radius: 5px;
-      padding: 8px;
-      font-size: 13px;
-      box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-      opacity: 0;
-      transition: opacity 0.1s ease;
-      z-index: 999;
-    }
-    #brush-area {
-      margin-top: 10px;
-    }
-    .toolbar {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      margin-bottom: 1rem;
-    }
-    .toolbar button {
-      margin: 5px;
-    }
-    .modal-bg {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: rgba(0,0,0,0.5);
-      display: none; /* caché par défaut */
-      justify-content: center;
-      align-items: center;
-      z-index: 2000;
-    }
-    .modal-content {
-      background: #fff;
-      padding: 20px;
-      border-radius: 8px;
-      width: 90%;
-      max-width: 600px;
-    }
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .modal-header h5 {
-      margin: 0;
-    }
-    .modal-footer {
-      text-align: right;
-      margin-top: 10px;
-    }
+    /* Style général */
+
+
+
+/* Section hero */
+.hero {
+  text-align: center;
+  padding: 30px 20px;
+  background: linear-gradient(to right, #6a11cb, #2575fc);
+  color: white;
+}
+.hero h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+/* Conteneur principal du chart */
+#chart-container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#chart-title {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+/* Légende */
+.legend {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+}
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-right: 15px;
+}
+.legend-color {
+  width: 12px;
+  height: 12px;
+  margin-right: 8px;
+  background-color: #5470C6;
+  border-radius: 2px;
+}
+
+/* Barre d'outils */
+.toolbar {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.toolbar button {
+  font-size: 0.875rem;
+  padding: 5px 10px;
+  border-radius: 4px;
+  border: none;
+  transition: background-color 0.2s ease;
+}
+.toolbar button:hover {
+  opacity: 0.9;
+}
+
+/* Tooltip */
+.tooltip-d3 {
+  position: absolute;
+  pointer-events: none;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 8px;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  font-size: 0.875rem;
+  color: #333;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+/* Modale DataView */
+.modal-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+.modal-content {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #ddd;
+  margin-bottom: 10px;
+}
+.modal-header h5 {
+  margin: 0;
+}
+.modal-header .btn-close {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+.modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Brush area */
+#brush-area {
+  margin-top: 20px;
+}
+
+/* Axes */
+.axis text {
+  font-size: 12px;
+}
+.axis path,
+.axis line {
+  stroke: #ccc;
+}
+
+/* Bars */
+.bar rect {
+  stroke: white;
+}
+
+/* Responsive SVG */
+svg {
+  display: block;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
   </style>
 </head>
 <body>
 
-  <!-- NAVBAR -->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="index.html">Datavisualisation JO 2024</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link active" href="vis1.html">Visualisation 1</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="vis2.html">Visualisation 2</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="vis3.html">Visualisation 3</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="vis4.html">Visualisation 4</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="vis5.html">Visualisation 5</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="vis6.html">Visualisation 6</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <!-- SECTION NAV -->
+  <div id="navbar-container"></div>
+ 
 
   <!-- SECTION HERO -->
   <header class="hero">
@@ -178,15 +191,7 @@
 
   <!-- CONTENEUR PRINCIPAL DU CHART ET OUTILS -->
   <div id="chart-container">
-    <div id="chart-title">Répartition des Voyages par Mode</div>
 
-    <!-- Légende (une seule série "Voyages") -->
-    <div class="legend">
-      <div class="legend-item">
-        <div class="legend-color"></div>
-        <span>Voyages</span>
-      </div>
-    </div>
 
     <!-- Barre d’outils (simule ECharts toolbox) -->
     <div class="toolbar">
@@ -233,6 +238,13 @@
       </div>
     </div>
   </div>
+
+    <!-- PIED DE PAGE -->
+    <footer class="text-center mt-5 py-4">
+      <p>© 2024 Groupe 17. Tous droits réservés.</p>
+    </footer>
+
+
 
   <!-- Script Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -595,5 +607,15 @@
       });
     });
   </script>
+
+      <!-- SCRI DE PAGE -->
+      <script src="https://d3js.org/d3.v7.min.js"></script>
+      <script>
+        // Charger la barre de navigation depuis nav.html
+        d3.html("nav.html").then((data) => {
+          // Insérer la navigation dans l'élément avec l'ID "navbar-container"
+          document.getElementById("navbar-container").appendChild(data.body.firstChild);
+        });
+      </script>
 </body>
 </html>

@@ -3,29 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <title>Saturation des Transports en Île-de-France - JO 2024</title>
+    <link rel="stylesheet" href="styles.css" />
+  
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
-      body {
-        font-family: "Poppins", sans-serif;
-        background-color: #f4f7f9;
-        margin: 0;
-        padding: 0;
-      }
-
-      h2 {
-        text-align: center;
-        font-weight: 600;
-        color: #333;
-        margin-top: 20px;
-      }
-
       #slider-container {
         width: 600px;
         margin: 20px auto;
         text-align: center;
       }
 
-      /* Slider épuré avec une seule couleur élégante */
       #daySlider {
         -webkit-appearance: none;
         width: 100%;
@@ -53,11 +45,6 @@
         transform: scale(1.3);
       }
 
-      #legend {
-        text-align: center;
-        margin-top: 20px;
-      }
-
       svg {
         display: block;
         margin: auto;
@@ -76,10 +63,19 @@
         font-size: 12px;
         box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
       }
+
+      #legend {
+        margin-top: 20px;
+        text-align: center;
+      }
     </style>
   </head>
+
   <body>
-    <h2>Saturation des Transports en Île-de-France pendant les JO 2024</h2>
+    <!-- SECTION NAV -->
+    <div id="navbar-container"></div>
+
+    <h2 class="text-center my-4">Saturation des Transports en Île-de-France pendant les JO 2024</h2>
 
     <div id="slider-container">
       <input type="range" min="0" max="14" value="0" id="daySlider" />
@@ -88,6 +84,11 @@
 
     <div id="map"></div>
     <div id="legend"></div>
+
+    <!-- PIED DE PAGE -->
+    <footer class="text-center mt-5 py-4">
+      <p>© 2024 Groupe 17. Tous droits réservés.</p>
+    </footer>
 
     <script>
       const width = 800,
@@ -121,10 +122,9 @@
         });
       }
 
-      // ✅ Correction de la légende
       function createLegend() {
         const legendWidth = 450,
-          legendHeight = 15; // 📏 Augmentation de la largeur
+          legendHeight = 15;
 
         const legendSvg = d3
           .select("#legend")
@@ -220,6 +220,13 @@
           });
         })
         .catch((error) => console.error("❌ Erreur de chargement :", error));
+    </script>
+
+    <!-- SCRIPT NAV -->
+    <script>
+      d3.html("nav.html").then((data) => {
+        document.getElementById("navbar-container").appendChild(data.body.firstChild);
+      });
     </script>
   </body>
 </html>

@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="styles.css" />
   <title>Carte Interactive avec Leaflet</title>
   
   <!-- Bootstrap CSS -->
@@ -16,59 +17,19 @@
     rel="stylesheet"
     href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
   />
-
-  <!-- Votre propre fichier CSS (optionnel) -->
-  <link rel="stylesheet" href="style.css" />
-
   <style>
-    /* Style de la navbar */
-    .navbar .nav-link:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-      transition: background-color 0.3s ease;
-    }
-    #myNavbar {
-      background-color: #000 !important; /* Fond noir personnalisé */
-      color: #fff; /* Couleur des liens */
-    }
-
-    /* Dimensions et style de la carte */
     #map {
       width: 100%;
       height: 600px;
-      border: 1px solid #ccc; /* Bordure pour encadrer la carte */
-      margin-top: 1rem;       /* Petit espace en haut de la carte */
-    }
+      border: 1px solid #ccc; /* Bordure pour encadrer la carte */      margin-top: 1rem;       /* Petit espace en haut de la carte */
+    } 
   </style>
 </head>
 <body>
 
-  <!-- Barre de navigation (ex-nav.html), intégrée directement -->
-  <nav class="navbar navbar-expand-lg bg-dark navbar-dark shadow-sm" id="myNavbar">
-    <div class="container-fluid">
-      <a class="navbar-brand fs-4 fw-bold" href="index.html">Datavisualisation JO 2024</a>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-        <ul class="navbar-nav me-3">
-          <li class="nav-item"><a class="nav-link" href="vis1.html">Visualisation 1</a></li>
-          <li class="nav-item"><a class="nav-link" href="vis2.html">Visualisation 2</a></li>
-          <li class="nav-item"><a class="nav-link" href="vis3.html">Visualisation 3</a></li>
-          <li class="nav-item"><a class="nav-link" href="vis4.html">Visualisation 4</a></li>
-          <li class="nav-item"><a class="nav-link" href="vis5.html">Visualisation 5</a></li>
-          <li class="nav-item"><a class="nav-link" href="vis6.html">Visualisation 6</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+  <!-- SECTION NAV -->
+  <div id="navbar-container"></div>
+
 
   <!-- Contenu principal : la carte Leaflet -->
   <div class="container">
@@ -78,6 +39,11 @@
     <!-- Zone de la carte -->
     <div id="map"></div>
   </div>
+
+  <!-- PIED DE PAGE -->
+  <footer class="text-center mt-5 py-4">
+    <p>© 2024 Groupe 17. Tous droits réservés.</p>
+  </footer>
 
   <!-- Scripts Bootstrap et Leaflet -->
   <script
@@ -119,5 +85,18 @@
         console.error("Erreur lors du chargement du GeoJSON :", error);
       });
   </script>
+
+
+  
+      <!-- SCRI DE PAGE -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script>
+    // Charger la barre de navigation depuis nav.html
+    d3.html("nav.html").then((data) => {
+      // Insérer la navigation dans l'élément avec l'ID "navbar-container"
+      document.getElementById("navbar-container").appendChild(data.body.firstChild);
+    });
+  </script>
+
 </body>
 </html>

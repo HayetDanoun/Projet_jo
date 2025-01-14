@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="styles.css" />
   <title>Fusion - Heures & Kilomètres de voyage</title>
 
   <!-- Bootstrap CSS -->
@@ -14,31 +15,6 @@
   <script src="https://d3js.org/d3.v7.min.js"></script>
 
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f7f9fc;
-      margin: 0;
-      padding: 0;
-    }
-
-    /* Amélioration : style au survol des liens du menu */
-    .navbar .nav-link:hover {
-      background-color: rgba(255, 255, 255, 0.2);
-      transition: background-color 0.3s ease;
-    }
-    
-    #myNavbar {
-      background-color: #000 !important; /* Fond noir personnalisé */
-      color: #fff; /* Couleur des liens */
-    }
-
-    .hero {
-      background: #007bff;
-      color: #fff;
-      padding: 10px 20px;
-      text-align: center;
-      margin-bottom: 0;
-    }
 
     /* Conteneur pour aligner les deux charts côte à côte */
     .charts-row {
@@ -77,8 +53,8 @@
 </head>
 
 <body>
-  <!-- Conteneur où on va injecter la nav depuis nav.html -->
-  <div id="nav-container"></div>
+  <!-- SECTION NAV -->
+  <div id="navbar-container"></div>
 
   <!-- SECTION HERO PRINCIPALE -->
   <header class="hero">
@@ -364,5 +340,16 @@
       item.append("span").text(d.label);
     });
   </script>
+
+
+    <!-- SCRIPT NAV -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+    // Charger la barre de navigation depuis nav.html
+    d3.html("nav.html").then((data) => {
+        // Insérer la navigation dans l'élément avec l'ID "navbar-container"
+        document.getElementById("navbar-container").appendChild(data.body.firstChild);
+    });
+    </script>
 </body>
 </html>
