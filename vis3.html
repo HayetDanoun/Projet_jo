@@ -22,8 +22,6 @@
   <style>
     /* Style général */
 
-
-
 /* Section hero */
 .hero {
   text-align: center;
@@ -175,7 +173,6 @@ svg {
   margin: 0 auto;
   max-width: 100%;
 }
-
   </style>
 </head>
 <body>
@@ -239,12 +236,10 @@ svg {
     </div>
   </div>
 
-    <!-- PIED DE PAGE -->
-    <footer class="text-center mt-5 py-4">
-      <p>© 2024 Groupe 17. Tous droits réservés.</p>
-    </footer>
-
-
+  <!-- PIED DE PAGE -->
+  <footer class="text-center mt-5 py-4">
+    <p>© 2024 Groupe 17. Tous droits réservés.</p>
+  </footer>
 
   <!-- Script Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -353,7 +348,6 @@ svg {
 
       } else {
         // LINECHART
-        // Path
         const line = d3.line()
           .x(d => x(d.mode) + x.bandwidth() / 2)
           .y(d => y(d.voyages));
@@ -608,14 +602,14 @@ svg {
     });
   </script>
 
-      <!-- SCRI DE PAGE -->
-      <script src="https://d3js.org/d3.v7.min.js"></script>
-      <script>
-        // Charger la barre de navigation depuis nav.html
-        d3.html("nav.html").then((data) => {
-          // Insérer la navigation dans l'élément avec l'ID "navbar-container"
-          document.getElementById("navbar-container").appendChild(data.body.firstChild);
-        });
-      </script>
+  <!-- SCRIPT DE CHARGEMENT DE LA NAV -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script>
+    // Charger la barre de navigation depuis nav.html
+    d3.html("nav.html").then((data) => {
+      // Insérer la navigation dans l'élément avec l'ID "navbar-container"
+      document.getElementById("navbar-container").appendChild(data.body.firstChild);
+    });
+  </script>
 </body>
 </html>
