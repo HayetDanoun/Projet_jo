@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Saturation des Transports en Île-de-France - JO 2024</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: #f4f7f9;
+        margin: 0;
+        padding: 0;
+      }
+
+      h2 {
+        text-align: center;
+        font-weight: 600;
+        color: #333;
+        margin-top: 20px;
+      }
+
+      #slider-container {
+        width: 600px;
+        margin: 20px auto;
+        text-align: center;
+      }
+
+      /* Slider épuré avec une seule couleur élégante */
+      #daySlider {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 10px;
+        border-radius: 5px;
+        background-color: #007bff;
+        outline: none;
+        transition: background 0.3s;
+        box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      #daySlider::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 18px;
+        height: 18px;
+        border-radius: 50%;
+        background: #ffffff;
+        border: 2px solid #007bff;
+        cursor: pointer;
+        transition: transform 0.3s ease-in-out;
+      }
+
+      #daySlider::-webkit-slider-thumb:hover {
+        transform: scale(1.3);
+      }
+
+      #legend {
+        text-align: center;
+        margin-top: 20px;
+      }
+
+      svg {
+        display: block;
+        margin: auto;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.1);
+      }
+
+      #tooltip {
+        position: absolute;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: #fff;
+        padding: 8px;
+        border-radius: 5px;
+        pointer-events: none;
+        font-size: 12px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Saturation des Transports en Île-de-France pendant les JO 2024</h2>
+
+    <div id="slider-container">
+      <input type="range" min="0" max="14" value="0" id="daySlider" />
+      <p>Jour : <span id="currentDay">1</span></p>
+    </div>
+
+    <div id="map"></div>
+    <div id="legend"></div>
+
+    <script>
+      const width = 800,
+        height = 600;
+
+      const svg = d3
+        .select("#map")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
+
+      const projection = d3
+        .geoMercator()
+        .center([2.3522, 48.8566]) // Paris
+        .scale(8000)
+        .translate([width / 2, height / 2]);
+
+      const path = d3.geoPath().projection(projection);
+
+      // Palette de couleurs contrastée : Vert → Jaune → Rouge
+      const colorScale = d3
+        .scaleLinear()
+        .domain([0, 50, 100])
+        .range(["#00FF00", "#FFFF00", "#FF0000"]);
+
+      const fakeData = {};
+      for (let day = 0; day <= 14; day++) {
+        fakeData[day] = {};
+        ["75", "77", "78", "91", "92", "93", "94", "95"].forEach((dept) => {
+          fakeData[day][dept] = Math.floor(Math.random() * 100);
+        });
+      }
+
+      // ✅ Correction de la légende
+      function createLegend() {
+        const legendWidth = 450,
+          legendHeight = 15; // 📏 Augmentation de la largeur
+
+        const legendSvg = d3
+          .select("#legend")
+          .append("svg")
+          .attr("width", legendWidth)
+          .attr("height", 70);
+
+        const gradient = legendSvg
+          .append("defs")
+          .append("linearGradient")
+          .attr("id", "legendGradient")
+          .attr("x1", "0%")
+          .attr("y1", "0%")
+          .attr("x2", "100%")
+          .attr("y2", "0%");
+
+        gradient
+          .append("stop")
+          .attr("offset", "0%")
+          .attr("stop-color", "#00FF00");
+        gradient
+          .append("stop")
+          .attr("offset", "50%")
+          .attr("stop-color", "#FFFF00");
+        gradient
+          .append("stop")
+          .attr("offset", "100%")
+          .attr("stop-color", "#FF0000");
+
+        legendSvg
+          .append("rect")
+          .attr("x", 0)
+          .attr("y", 10)
+          .attr("width", legendWidth)
+          .attr("height", legendHeight)
+          .style("fill", "url(#legendGradient)");
+
+        legendSvg
+          .append("text")
+          .attr("x", 0)
+          .attr("y", 45)
+          .text("0% (Faible)")
+          .style("font-size", "12px");
+        legendSvg
+          .append("text")
+          .attr("x", legendWidth / 2 - 25)
+          .attr("y", 45)
+          .text("50% (Moyen)")
+          .style("font-size", "12px");
+        legendSvg
+          .append("text")
+          .attr("x", legendWidth - 80)
+          .attr("y", 45)
+          .text("100% (Fort)")
+          .style("font-size", "12px");
+      }
+
+      d3.json("geoFrance.json")
+        .then((data) => {
+          const ileDeFrance = {
+            type: "FeatureCollection",
+            features: data.features.filter((d) =>
+              ["75", "77", "78", "91", "92", "93", "94", "95"].includes(
+                d.properties.code
+              )
+            ),
+          };
+
+          function updateMap(day) {
+            svg
+              .selectAll("path")
+              .data(ileDeFrance.features)
+              .join("path")
+              .transition()
+              .duration(600)
+              .attr("d", path)
+              .attr("fill", (d) => {
+                const deptCode = d.properties.code;
+                const saturation = fakeData[day][deptCode] || 0;
+                return colorScale(saturation);
+              })
+              .attr("stroke", "#444")
+              .attr("stroke-width", 0.8);
+          }
+
+          updateMap(0);
+          createLegend();
+
+          d3.select("#daySlider").on("input", function () {
+            const day = +this.value;
+            d3.select("#currentDay").text(day + 1);
+            updateMap(day);
+          });
+        })
+        .catch((error) => console.error("❌ Erreur de chargement :", error));
+    </script>
+  </body>
+</html>

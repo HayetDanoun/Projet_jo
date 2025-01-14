@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Saturation des Transports en Île-de-France - JO 2024</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #f4f7f9;
+      margin: 0;
+      padding: 0;
+    }
+
+    h2 {
+      text-align: center;
+      font-weight: 600;
+      color: #333;
+      margin-top: 20px;
+    }
+
+    #map {
+      width: 100%;
+      height: 600px;
+      border-radius: 10px;
+      margin: 20px auto;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    #legend {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .legend-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .legend-box {
+      width: 20px;
+      height: 20px;
+      margin: 0 5px;
+    }
+
+    .legend-text {
+      font-size: 14px;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <h2>Saturation des Transports en Île-de-France pendant les JO 2024</h2>
+  <div id="map"></div>
+  <div id="legend">
+    <div class="legend-container">
+      <div class="legend-box" style="background-color: blue;"></div>
+      <span class="legend-text">Faible saturation</span>
+      <div class="legend-box" style="background-color: orange;"></div>
+      <span class="legend-text">Saturation moyenne</span>
+      <div class="legend-box" style="background-color: red;"></div>
+      <span class="legend-text">Forte saturation</span>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    // Initialisation de la carte
+    const map = L.map('map').setView([48.8566, 2.3522], 10);
+
+    // Ajout d'une couche OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+      maxZoom: 19,
+    }).addTo(map);
+
+    // URL du fichier GeoJSON
+    const geojsonUrl = "https://gist.githubusercontent.com/selmakoudia03/141a6521f5c408596ef2e3b8f4363bcf/raw/504bb6cc7485e0e3ad4deaaf8c0150fdc37b27c3/gistfile1.txt";
+
+    // Palette de couleurs en fonction de la saturation
+    function getColor(saturation) {
+      return saturation > 75 ? "red" :
+             saturation > 50 ? "orange" : "blue";
+    }
+
+    // Style des départements
+    function style(feature) {
+      const saturation = Math.random() * 100; // Saturation simulée
+      return {
+        color: "#555",
+        weight: 1,
+        fillColor: getColor(saturation),
+        fillOpacity: 0.7,
+      };
+    }
+
+    // Chargement et ajout du GeoJSON
+    fetch(geojsonUrl)
+      .then(response => response.json())
+      .then(data => {
+        L.geoJSON(data, { style }).addTo(map);
+      })
+      .catch(error => {
+        console.error("Erreur lors du chargement du GeoJSON :", error);
+      });
+  </script>
+</body>
+</html>
