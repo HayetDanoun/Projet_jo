@@ -325,15 +325,7 @@
       });
   
     // Légende (KM)
-    const legendKM = d3.select("#chartKM")
-      .append("div")
-      .attr("class", "legend");
-  
-    dataKM.forEach(d => {
-      const item = legendKM.append("div").attr("class", "legend-item");
-      item.append("span").style("background-color", d.color);
-      item.append("span").text(d.label);
-    });
+ 
   </script>
 
 
