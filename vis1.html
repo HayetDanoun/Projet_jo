@@ -15,7 +15,6 @@
   <script src="https://d3js.org/d3.v7.min.js"></script>
 
   <style>
-
     /* Conteneur pour aligner les deux charts côte à côte */
     .charts-row {
       margin: 20px 0;
@@ -27,27 +26,26 @@
       margin-bottom: 30px;
     }
 
+    /* Légendes (centrées) */
     .legend {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      margin-top: 10px;
+      align-items: center; /* Aligne verticalement */
+      margin: 10px auto;   /* Permet de centrer la légende dans la page */
     }
 
     .legend-item {
       display: flex;
-      align-items: center;
+      align-items: center; /* Aligne la pastille et le texte verticalement */
       margin: 5px 15px;
       font-size: 14px;
       color: #555;
     }
 
     .legend-item span:last-of-type {
-      margin-right: 50px; /* Ajoutez un espacement à droite du texte */
+      margin-right: 50px; /* Espacement à droite du texte */
     }
-
-    
-
 
     .legend-item span {
       display: inline-block;
@@ -76,7 +74,7 @@
       <div class="col-md-6">
         <h2 class="text-center mt-4">Répartition des Heures de Voyage</h2>
         <div class="chart-container" id="chartHeures">
-          <!-- plus de div tooltip -->
+          <!-- Le SVG et la légende seront injectés ici via D3 -->
         </div>
       </div>
 
@@ -84,10 +82,12 @@
       <div class="col-md-6">
         <h2 class="text-center mt-4">Répartition des km de Voyage</h2>
         <div class="chart-container" id="chartKM">
-          <!-- plus de div tooltip -->
+          <!-- Le SVG et la légende seront injectés ici via D3 -->
         </div>
       </div>
     </div>
+
+    <div id="legend"></div>
   </main>
 
   <footer class="text-center mt-5 py-4">
@@ -97,20 +97,7 @@
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-  <!-- SCRIPT D'INCLUSION DE LA NAVBAR VIA D3 -->
-  <script>
-    d3.html("nav.html").then(function(externalDOM) {
-        // Extraire uniquement le contenu de la balise <nav> dans nav.html
-        const navContent = externalDOM.querySelector("nav");
-        if (navContent) {
-            d3.select("#nav-container").node().appendChild(navContent);
-        } else {
-            console.error("Le fichier nav.html ne contient pas de balise <nav>.");
-        }
-    }).catch(function(error) {
-        console.error("Erreur lors du chargement de nav.html :", error);
-    });
-  </script>
+
 
   <!-- SCRIPT : Répartition des Heures de Voyage -->
   <script>
@@ -211,18 +198,6 @@
           return arcHeures(interpolate(t));
         };
       });
-  
-
-    // Légende (Heures)
-    const legendHeures = d3.select("#chartHeures")
-      .append("div")
-      .attr("class", "legend");
-  
-    dataHeures.forEach(d => {
-      const item = legendHeures.append("div").attr("class", "legend-item");
-      item.append("span").style("background-color", d.color);
-      item.append("span").text(d.label);
-    });
   </script>
   
   <!-- SCRIPT : Répartition des KM de Voyage -->
@@ -325,18 +300,25 @@
       });
   
     // Légende (KM)
- 
+    const legendKM = d3.select("#legend")
+      .append("div")
+      .attr("class", "legend");
+  
+    dataKM.forEach(d => {
+      const item = legendKM.append("div").attr("class", "legend-item");
+      item.append("span").style("background-color", d.color);
+      item.append("span").text(d.label);
+    });
   </script>
 
-
-    <!-- SCRIPT NAV -->
-    <script src="https://d3js.org/d3.v7.min.js"></script>
-    <script>
+  <!-- SCRIPT NAV -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script>
     // Charger la barre de navigation depuis nav.html
     d3.html("nav.html").then((data) => {
         // Insérer la navigation dans l'élément avec l'ID "navbar-container"
         document.getElementById("navbar-container").appendChild(data.body.firstChild);
-    });
-    </script>
+    });vv
+  </script>
 </body>
 </html>
