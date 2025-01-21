@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="styles.css" />
+        <title>Synthèse Datavisualisation JO 2024</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      
+  <!-- Bootstrap CSS -->
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+
+
+  <!-- D3 -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+
+</head>
+<body>
+    <!-- SECTION NAV -->
+    <div id="navbar-container"></div>
+
+    <!-- SECTION HERO PRINCIPALE -->
+    <header class="hero">
+        <h1>Synthèse : Datavisualisation et Jeux Olympiques 2024</h1>
+    </header>
+
+
+    <main class="container mt-4">
+        <section>
+            <h2>Contexte et Objectifs</h2>
+            <p>
+                Les Jeux Olympiques et Paralympiques de Paris 2024 sont une opportunité unique de mettre en lumière les défis liés à la gestion des infrastructures de transport en Île-de-France. Le projet de datavisualisation présenté dans les fichiers a pour ambition de :
+            </p>
+            <ul>
+                <li>Identifier les zones de forte densité de trafic et les heures de pointe.</li>
+                <li>Aider les habitants et visiteurs à mieux planifier leurs déplacements.</li>
+                <li>Soutenir les gestionnaires des transports publics dans leur prise de décision.</li>
+                <li>Promouvoir des solutions de mobilité durable.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Contenus et Visualisations</h2>
+            <ol>
+                <li><strong>Carte Interactive (Leaflet)</strong><br>
+                    Présentée dans <em>vis2.html</em>, cette carte utilise un fichier GeoJSON (<em>geoFrance.json</em>) pour visualiser les contours d'une zone en France. Les données de saturation sont intégrées dynamiquement pour fournir une représentation visuelle des points de congestion.
+                </li>
+                <li><strong>Bar Charts et Graphiques Dynamiques</strong><br>
+                    Les fichiers comme <em>vis3.html</em> et <em>vis4.html</em> offrent des visualisations interactives sous forme de graphiques en barres, permettant de suivre des indicateurs précis comme les déplacements par tranche horaire.
+                </li>
+                <li><strong>Analyses de Transport et Saturation</strong><br>
+                    Les fichiers <em>vis5.html</em> et <em>vis6.html</em> se concentrent sur la saturation des transports en Île-de-France. Les visualisations intégrées démontrent l'utilisation de D3.js pour fournir des cartes thermiques dynamiques avec des curseurs permettant d'explorer les données dans le temps.
+                </li>
+                <li><strong>Navigation et Intégration</strong><br>
+                    Le fichier <em>nav.html</em> propose une interface de navigation uniforme qui relie les différentes visualisations. Cela assure une expérience utilisateur cohérente et intuitive pour explorer les données.
+                </li>
+            </ol>
+        </section>
+
+        <section>
+            <h2>Technologies Utilisées</h2>
+            <ul>
+                <li><strong>Frameworks et Librairies</strong> :
+                    <ul>
+                        <li>Bootstrap pour le design responsive.</li>
+                        <li>D3.js et ECharts pour les graphiques interactifs.</li>
+                        <li>Leaflet pour la gestion des cartes interactives.</li>
+                    </ul>
+                </li>
+                <li><strong>Données</strong> : Un fichier GeoJSON fournit les données géographiques pour les visualisations cartographiques.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Résumé</h2>
+            <p>
+                Ce projet illustre l'importance de la visualisation de données pour gérer des défis complexes comme ceux des Jeux Olympiques. Grâce à une interface intuitive et des outils interactifs, il permet d'anticiper les problèmes de saturation des transports, tout en sensibilisant à des solutions durables.
+            </p>
+        </section>
+
+        <section>
+            <h2>Sources Utilisées</h2>
+            <ul>
+                <li><em>vis1.html</em>, <em>vis2.html</em>, <em>vis3.html</em>, <em>vis4.html</em>, <em>vis5.html</em>, <em>vis6.html</em>, <em>index.html</em>, <em>nav.html</em> (HTML et JavaScript interactifs pour datavisualisation).</li>
+                <li><em>geoFrance.json</em> (Données géographiques pour les cartes).</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer class="text-center bg-light py-3 mt-4">
+        <p>&copy; 2024 Projet Datavisualisation JO 2024. Tous droits réservés.</p>
+    </footer>
+
+  <!-- SCRIPT NAV -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script>
+    // Charger la barre de navigation depuis nav.html
+    d3.html("nav.html").then((data) => {
+        // Insérer la navigation dans l'élément avec l'ID "navbar-container"
+        document.getElementById("navbar-container").appendChild(data.body.firstChild);
+    });
+  </script>
+</body>
+</html>
