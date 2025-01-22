@@ -32,7 +32,7 @@
 </head>
 <body>
 
-  <!-- SECTION NAV (barre de navigation importée) -->
+  <!-- SECTION NAV -->
   <div id="navbar-container"></div>
 
   <!-- Contenu principal -->
@@ -48,10 +48,16 @@
     <div id="map"></div>
   </div>
 
-  <!-- PIED DE PAGE -->
-  <footer class="text-center mt-5 py-4">
-    <p>© 2024 Groupe 17. Tous droits réservés.</p>
-  </footer>
+  <!-- SECTION FOOTER -->
+  <div id="footer-container"></div>
+
+  <script>
+    // Charger la barre de navigation depuis nav.html
+    d3.html("footer.html").then((data) => {
+        // Insérer la navigation dans l'élément avec l'ID "navbar-container"
+        document.getElementById("footer-container").appendChild(data.body.firstChild);
+    });
+  </script>
 
   <!-- Scripts nécessaires : Bootstrap, Leaflet, D3 -->
   <script

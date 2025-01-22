@@ -93,6 +93,7 @@
 </head>
 
 <body>
+
   <!-- SECTION NAV -->
   <div id="navbar-container"></div>
 
@@ -121,10 +122,16 @@
     <div id="legend"></div>
   </div>
 
-  <!-- PIED DE PAGE -->
-  <footer>
-    © 2024 Groupe 17. Tous droits réservés.
-  </footer>
+  <!-- SECTION FOOTER -->
+  <div id="footer-container"></div>
+
+  <script>
+    // Charger la barre de navigation depuis nav.html
+    d3.html("footer.html").then((data) => {
+        // Insérer la navigation dans l'élément avec l'ID "navbar-container"
+        document.getElementById("footer-container").appendChild(data.body.firstChild);
+    });
+  </script>
 
   <!-- Script D3 -->
   <script>

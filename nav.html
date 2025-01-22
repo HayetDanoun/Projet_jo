@@ -1,5 +1,3 @@
-
-
 <nav class="navbar navbar-expand-lg bg-dark navbar-dark shadow-sm" id="myNavbar">
     <div class="container-fluid">
       <a class="navbar-brand fs-4 fw-bold" href="index.html">Datavisualisation JO 2024</a>
@@ -16,14 +14,24 @@
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
         <ul class="navbar-nav me-3">
-          <li class="nav-item"><a class="nav-link" href="vis1.html">Temps et Distance de Voyage</a></li>
-          <li class="nav-item"><a class="nav-link" href="vis2.html">Carte Interactive</a></li>
-          <li class="nav-item"><a class="nav-link" href="vis3.html">Modes de Déplacement</a></li>
-          <li class="nav-item"><a class="nav-link" href="vis4.html">Déplacements par quart d'heure</a></li>
-          <li class="nav-item"><a class="nav-link" href="vis5.html">Saturation des Transports</a></li>
+          <li class="nav-item"><a class="nav-link" href="temps-et-distance-de-voyage.html">Temps et Distance de Voyage</a></li>
+          <li class="nav-item"><a class="nav-link" href="carte-interactive.html">Carte Interactive</a></li>
+          <li class="nav-item"><a class="nav-link" href="modes-de-deplacement.html">Modes de Déplacement</a></li>
+          <li class="nav-item"><a class="nav-link" href="deplacements-par-quart-d-heure.html">Déplacements par quart d'heure</a></li>
+          <li class="nav-item"><a class="nav-link" href="saturation-des-transports.html">Saturation des Transports</a></li>
           <li class="nav-item"><a class="nav-link" href="apropos.html">A propos</a></li>
 
         </ul>
       </div>
     </div>
 </nav>
+
+  <!-- SCRIPT NAV -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script>
+    // Charger la barre de navigation depuis nav.html
+    d3.html("nav.html").then((data) => {
+        // Insérer la navigation dans l'élément avec l'ID "navbar-container"
+        document.getElementById("navbar-container").appendChild(data.body.firstChild);
+    });
+  </script>

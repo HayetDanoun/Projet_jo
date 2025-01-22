@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8" />
+  <link rel="stylesheet" href="styles.css" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   
   <!-- Bootstrap CSS -->
@@ -76,11 +78,6 @@
       transition: opacity 0.1s;
     }
 
-    /* Footer */
-    footer {
-      border-top: 1px solid #dedede;
-      background-color: #f8f9fa;
-    }
   </style>
 </head>
 
@@ -88,7 +85,6 @@
     <!-- SECTION NAV -->
     <div id="navbar-container"></div>
 
-  <!-- HEADER / HERO -->
     <!-- SECTION HERO -->
     <header class="hero">
       <h1>Déplacements par quart d'heure</h1>
@@ -105,10 +101,16 @@
     </div>
   </div>
 
-  <!-- FOOTER -->
-  <footer class="text-center mt-5 py-4">
-    <p>&copy; 2024 Groupe 17. Tous droits réservés.</p>
-  </footer>
+  <!-- SECTION FOOTER -->
+  <div id="footer-container"></div>
+
+  <script>
+    // Charger la barre de navigation depuis nav.html
+    d3.html("footer.html").then((data) => {
+        // Insérer la navigation dans l'élément avec l'ID "navbar-container"
+        document.getElementById("footer-container").appendChild(data.body.firstChild);
+    });
+  </script>
 
   <!-- SCRIPT D3 : Stacked Bar Chart -->
   <script>
