@@ -1,33 +1,30 @@
 <!DOCTYPE html>
 <html lang="fr">
-    <head>
-        <meta charset="UTF-8" />
-        <link rel="stylesheet" href="styles.css" />
-        <title>Synthèse Datavisualisation JO 2024</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Synthèse Datavisualisation JO 2024</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
       
-  <!-- Bootstrap CSS -->
-  <link
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-    rel="stylesheet"
-  />
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.min.js"></script>
 
-
-  <!-- D3 -->
-  <script src="https://d3js.org/d3.v7.min.js"></script>
-
+    <!-- D3 -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
 </head>
 <body>
     <!-- SECTION NAV -->
     <div id="navbar-container"></div>
 
-    <!-- SECTION HERO PRINCIPALE -->
+    <!-- SECTION HERO -->
     <header class="hero">
         <h1>Synthèse : Datavisualisation et Jeux Olympiques 2024</h1>
     </header>
-
 
     <main class="container mt-4">
         <section>
@@ -50,7 +47,7 @@
                     Présentée dans <em>vis2.html</em>, cette carte utilise un fichier GeoJSON (<em>geoFrance.json</em>) pour visualiser les contours d'une zone en France. Les données de saturation sont intégrées dynamiquement pour fournir une représentation visuelle des points de congestion.
                 </li>
                 <li><strong>Bar Charts et Graphiques Dynamiques</strong><br>
-                    Les fichiers comme <em>vis3.html</em> et <em>vis4.html</em> offrent des visualisations interactives sous forme de graphiques en barres, permettant de suivre des indicateurs précis comme les déplacements par tranche horaire.
+                    Les fichiers comme <em>vis3.html</em> et <em>vis4.html</em> offrent des visualisations interactives (graphique en barres, ligne, etc.), permettant de suivre des indicateurs précis (déplacements par tranche horaire, mode de transport...) avec notamment une fonctionnalité de zoom/brush pour se concentrer sur une partie des données.
                 </li>
                 <li><strong>Analyses de Transport et Saturation</strong><br>
                     Les fichiers <em>vis5.html</em> et <em>vis6.html</em> se concentrent sur la saturation des transports en Île-de-France. Les visualisations intégrées démontrent l'utilisation de D3.js pour fournir des cartes thermiques dynamiques avec des curseurs permettant d'explorer les données dans le temps.
@@ -67,8 +64,9 @@
                 <li><strong>Frameworks et Librairies</strong> :
                     <ul>
                         <li>Bootstrap pour le design responsive.</li>
-                        <li>D3.js et ECharts pour les graphiques interactifs.</li>
+                        <li>D3.js pour les graphiques interactifs.</li>
                         <li>Leaflet pour la gestion des cartes interactives.</li>
+                        <li>html2canvas pour l’exportation des graphiques en images (capture du DOM).</li>
                     </ul>
                 </li>
                 <li><strong>Données</strong> : Un fichier GeoJSON fournit les données géographiques pour les visualisations cartographiques.</li>
@@ -91,18 +89,25 @@
         </section>
     </main>
 
-    <footer class="text-center bg-light py-3 mt-4">
-        <p>&copy; 2024 Projet Datavisualisation JO 2024. Tous droits réservés.</p>
-    </footer>
+  <!-- SECTION FOOTER -->
+  <div id="footer-container"></div>
 
-  <!-- SCRIPT NAV -->
-  <script src="https://d3js.org/d3.v7.min.js"></script>
   <script>
     // Charger la barre de navigation depuis nav.html
-    d3.html("nav.html").then((data) => {
+    d3.html("footer.html").then((data) => {
         // Insérer la navigation dans l'élément avec l'ID "navbar-container"
-        document.getElementById("navbar-container").appendChild(data.body.firstChild);
+        document.getElementById("footer-container").appendChild(data.body.firstChild);
     });
   </script>
+
+    <!-- SCRIPT NAV -->
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+      // Charger la barre de navigation depuis nav.html
+      d3.html("nav.html").then((data) => {
+          // Insérer la navigation dans l'élément avec l'ID "navbar-container"
+          document.getElementById("navbar-container").appendChild(data.body.firstChild);
+      });
+    </script>
 </body>
 </html>
