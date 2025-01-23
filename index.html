@@ -63,16 +63,16 @@
     </section>
   </main>
 
-  <!-- SECTION FOOTER -->
-  <div id="footer-container"></div>
+<!-- SECTION FOOTER -->
+<div id="footer-container"></div>
 
-  <script>
-    // Charger la barre de navigation depuis nav.html
-    d3.html("footer.html").then((data) => {
-        // Insérer la navigation dans l'élément avec l'ID "navbar-container"
-        document.getElementById("footer-container").appendChild(data.body.firstChild);
-    });
-  </script>
+<script>
+  // Charger la barre de navigation depuis nav.html
+  d3.html("footer.html").then((data) => {
+      // Insérer la navigation dans l'élément avec l'ID "navbar-container"
+      document.getElementById("footer-container").appendChild(data.body.firstChild);
+  });
+</script>
 
 
 
